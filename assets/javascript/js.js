@@ -30,7 +30,7 @@ for (i=0; i<all_buttons.length; i++) {
     a.addClass("buttonz btn btn-primary")
     a.attr("data-name", all_buttons[i])
     a.text(all_buttons[i])
-    $("#buttons-span").append(a)
+    $("#buttons-span").prepend(a)
     }
     $("#form-input").val("")
 }
