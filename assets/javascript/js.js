@@ -18,7 +18,7 @@ $.ajax({
     let gif_url = response.data[random].images.original.url
     let gif = $("<img>").attr("src", gif_url)
     gif_div.append(gif)
-    $("#gif-span").append(gif_div)
+    $("#gif-span").prepend(gif_div)
 });
 }
 function random_number(max) {
