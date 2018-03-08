@@ -17,6 +17,9 @@ $.ajax({
     let random = random_number(99)
     let gif_url = response.data[random].images.original.url
     let gif = $("<img>").attr("src", gif_url)
+    let rating = response.data[random].rating
+    let p = $("<p>").text("Rating:"+rating)
+    gif_div.prepend(p)
     gif_div.append(gif)
     $("#gif-span").prepend(gif_div)
 });
@@ -27,7 +30,7 @@ function random_number(max) {
 function create_buttonz() {
 let a = $("<button>")
 for (i=0; i<all_buttons.length; i++) {
-    a.addClass("buttonz btn btn-primary")
+    a.addClass("buttonz btn btn-info")
     a.attr("data-name", all_buttons[i])
     a.text(all_buttons[i])
     $("#buttons-span").prepend(a)
