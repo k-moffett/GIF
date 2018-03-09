@@ -57,22 +57,25 @@ function add_favorite() {
     $(this).removeAttr("id", current_class)
     $(this).addClass("favs")
     $("#fav-gif-span").prepend(this)
-    favorites.push(this)
+    favorites.push(this.currentSrc)
     console.log(favorites)
     $("."+current_class+"").remove()
     save_favs()
 }
 function save_favs(){
     for (i=0; i<favorites.length; i++){
-        localStorage.setItem("favorites", favorites[i].currentSrc)
+        localStorage.setItem("favorites", favorites)
     }
 }
 function get_favs(){
 let reload = localStorage.getItem("favorites")
-let img_div = $("<img src="+reload+">")
-$("#fav-gif-span").prepend(img_div)
-console.log(reload)
+let array =reload.split(",")
+let img_div = $("<img>")
+for (i=0; i<array.length; i++){
+img_div.attr("src", [i])
+$("#fav-gif-span").append(img_div)
+}
+console.log(array)
 }
 get_favs()
-
 });
