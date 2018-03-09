@@ -1,5 +1,6 @@
 $( document ).ready(function () {
 let all_buttons = []
+let favorites = []
 let p_class = 0
 function generate_gif(){
     let search_term = $(this).attr("data-name")
@@ -51,16 +52,27 @@ $("#clear-gifs").on("click", function(){
 $(document).on("click", "#for-fav", add_favorite)
 
 function add_favorite() {
-    let favorites = []
     let current_class = $(this).attr("class")
-    console.log(current_class)
     $(this).removeClass(current_class)
+    $(this).removeAttr("id", current_class)
+    $(this).addClass("favs")
     $("#fav-gif-span").prepend(this)
     favorites.push(this)
+    console.log(favorites)
     $("."+current_class+"").remove()
-    console.log(favorites, "favorites")
-
+    save_favs()
 }
-
+function save_favs(){
+    for (i=0; i<favorites.length; i++){
+        localStorage.setItem("favorites", favorites[i].currentSrc)
+    }
+}
+function get_favs(){
+let reload = localStorage.getItem("favorites")
+let img_div = $("<img src="+reload+">")
+$("#fav-gif-span").prepend(img_div)
+console.log(reload)
+}
+get_favs()
 
 });
