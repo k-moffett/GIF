@@ -1,9 +1,5 @@
 $( document ).ready(function () {
-
-
 let all_buttons = []
-
-
 function generate_gif(){
     let search_term = $(this).attr("data-name")
     let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=qb8lbk6ofj2a1OHH6gXZDnJbL6M4s5Zl&q=" + search_term + "&limit=100&offset=0&rating=G&lang=en";
@@ -16,7 +12,7 @@ $.ajax({
     let gif_div = $("<div class=`gif_div`>")
     let random = random_number(99)
     let gif_url = response.data[random].images.original.url
-    let gif = $("<img>").attr("src", gif_url)
+    let gif = $("<img>").attr("src", gif_url).addClass("for_fav")
     let rating = response.data[random].rating
     let p = $("<p>").text("Rating:"+rating)
     gif_div.prepend(p)
@@ -52,4 +48,12 @@ $("#clear-gifs").on("click", function(){
     event.preventDefault();
     $("#gif-span").empty()
 })
+
+
+$(document).on("click", ".for_fav", add_favorite)
+function add_favorite() {
+    $("#fav-gif-span").prepend(this)
+}
+
+
 });
