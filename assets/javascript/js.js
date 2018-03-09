@@ -1,5 +1,6 @@
 $( document ).ready(function () {
 let all_buttons = []
+let p_class = 0
 function generate_gif(){
     let search_term = $(this).attr("data-name")
     let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=qb8lbk6ofj2a1OHH6gXZDnJbL6M4s5Zl&q=" + search_term + "&limit=100&offset=0&rating=G&lang=en";
@@ -7,17 +8,16 @@ $.ajax({
     url: queryURL,
     method: 'GET'
 }).then(function(response) {
-    console.log(response);
-    console.log(search_term)
-    let gif_div = $("<div class=`gif_div`>")
+    let gif_div = $("<div>").addClass("gif_div")
     let random = random_number(99)
     let gif_url = response.data[random].images.original.url
-    let gif = $("<img>").attr("src", gif_url).addClass("for_fav")
+    let gif = $("<img>").attr("src", gif_url).attr("id", "for-fav").addClass(""+p_class+"")
     let rating = response.data[random].rating
-    let p = $("<p>").text("Rating:"+rating)
+    let p = $("<p class="+p_class+">").text("Rating:"+rating)
     gif_div.prepend(p)
     gif_div.append(gif)
     $("#gif-span").prepend(gif_div)
+    p_class++
 });
 }
 function random_number(max) {
@@ -48,11 +48,18 @@ $("#clear-gifs").on("click", function(){
     event.preventDefault();
     $("#gif-span").empty()
 })
+$(document).on("click", "#for-fav", add_favorite)
 
-
-$(document).on("click", ".for_fav", add_favorite)
 function add_favorite() {
+    let favorites = []
+    let current_class = $(this).attr("class")
+    console.log(current_class)
+    $(this).removeClass(current_class)
     $("#fav-gif-span").prepend(this)
+    favorites.push(this)
+    $("."+current_class+"").remove()
+    console.log(favorites, "favorites")
+
 }
 
 
