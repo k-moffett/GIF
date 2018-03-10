@@ -69,11 +69,10 @@ function save_favs(){
 }
 function get_favs(){
 let reload = localStorage.getItem("favorites")
-let array =reload.split(",")
-let img_div = $("<img>")
+let array = reload.split(",")
 for (i=0; i<array.length; i++){
-img_div.attr("src", [i])
-$("#fav-gif-span").append(img_div)
+let temp = array[i].toString()
+$("<img src="+temp+">").appendTo($("#fav-gif-span"))
 }
 console.log(array)
 }
