@@ -1,4 +1,10 @@
-
+body {
+    background-image: url(../images/cats.jpg);
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .container {
     margin: 1%;
     width: 100%;
@@ -10,4 +16,10 @@ img {
     height:250px;
     width: 250px;
     margin:.5%
+}
+.card-header {
+    background-color: cyan;
+}
+.card {
+    background-color: darkcyan;
 }
